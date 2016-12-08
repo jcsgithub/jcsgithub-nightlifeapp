@@ -26,53 +26,6 @@ body {
 
 
 
-/****** All Polls ******/
-.all-polls td {
-    border: 1px solid #ddd;
-	cursor: pointer;
-	height: 100%;
-	padding: 0 !important;
-	text-align: center;
-}
-
-.all-polls td a {
-    display: block;
-    height: 100%;
-	padding: 20px !important;
-    text-decoration: none;
-    width: 100%;
-}
-
-
-
-/****** New Poll & View Poll ******/
-.newpoll .row > div, .viewpoll .row > div{
-    margin-bottom: 30px;
-}
-
-.newpoll-form button[type="submit"] {
-    margin-top: 30px;
-}
-
-.newpoll-options div {
-    margin-bottom: 15px;
-}
-
-.viewpoll .submit-btn, .viewpoll .share-btn {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 0;
-    width: 75%;
-}
-
-#myChart {
-    height: 85% !important;
-    margin: 0 auto;
-    width: 85% !important;
-}
-
-
-
 /****** Footer ******/
 footer {
 	margin: 20px 0 15px 0;
@@ -81,12 +34,16 @@ footer {
 
 
 /****** Others ******/
+.hidden {
+    display: none !important;
+}
+
 .show {
     display: block !important;
 }
 
-.hidden {
-    display: none !important;
+.text-small {
+    font-size: 16px !important;
 }
 
 [ng-cloak] {

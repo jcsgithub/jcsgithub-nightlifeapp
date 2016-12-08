@@ -2,45 +2,45 @@
 
 (function () {
    angular
-      .module('VotingApp', ['ngResource'])
+      .module('NightlifeApp', ['ngResource'])
       .controller('indexController', ['$scope', '$resource', function ($scope, $resource) {
          
          /***** INITIALIZE *****/
          $scope.loader = { isLoadingPolls: true };
-         $scope.polls = [];
+         
+         $scope.bars = [];
+         $scope.searchTxt = '';
          
          var User = $resource('/api/user');
-         var Polls = $resource('/api/polls');
+         
+         getUser();
          
          
          
          /***** CONTROLLER FUNCTIONS *****/
+         function getBars (searchTxt) {
+            console.log('user is logged in, getting bars')
+         }
+         
          function getUser () {
             User.get(function (res) {
-               if (res.displayName !== null) {
+               console.log('getUser', res)
+               if (res._id) {
                   $("#authorized-navbar").removeClass("hide");
                   $("#unauthorized-navbar").addClass("hide");
+                  
+                  // if user is logged in, continue with the last search
+                  getBars($scope.searchTxt);
                }
             }, function (err) {
                $("#authorized-navbar").addClass("hide");
                $("#unauthorized-navbar").removeClass("hide");
             });
          };
-         
-         function getPolls () {
-            Polls.get(function (res) {
-               $scope.loader.isLoadingPolls = false;
-               $scope.polls = res.data;
-               $('.all-polls table').removeClass('hidden');
-            }, function (err) {
-               $scope.loader.isLoadingPolls = false;
-               
-               console.log('getPolls error', err);
-               alert('Oops! Something went wrong. Try again later.');
-            });
-         }
 
-         getUser();
-         getPolls();
+         
+         
+         /***** USER INTERACTIONS *****/
+         
       }]);
 })();

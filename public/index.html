@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="VotingApp">
+<html lang="en" ng-app="NightlifeApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Voting App by jcsgithub</title>
+    <title>Nightlife Coordination App by jcsgithub</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -30,20 +30,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Voting App</a>
+            <a class="navbar-brand" href="#">Nightlife Coordination App</a>
         </div>
 		
         <div id="navbar" class="navbar-collapse collapse">
             <!-- Navbar unauthorized -->
             <ul id="unauthorized-navbar" class="nav navbar-nav navbar-right hide">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="/auth/facebook">Sign in with Facebook</a></li>
+                <li><a ng-href="/auth/facebook">Sign in with Facebook</a></li>
             </ul>
             
             <!-- Navbar authorized -->
             <ul id="authorized-navbar" class="nav navbar-nav navbar-right hide">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="/mypolls">My Polls</a></li>
+                <li><a href="/plans">My Plans</a></li>
                 <li><a href="/logout">Sign out</a></li>
             </ul>
         </div>
@@ -51,36 +51,21 @@
 </nav>
 
 <div class="container">
-    <div class="jumbotron">
-        <h1>FCC Voting App Project</h1>
-        <p>This is one of the project in Freecodecamp's curriculum, Dynamic Web Application Projects entitled: <br/> "Build a Voting App".</p>
-        <p>Login to create and manage your own poll. Or just click on any poll you want below and submit your vote!</p>
+    <div class="jumbotron text-center">
+        <h3>FCC Nightlife Coordination App Project</h2>
+        <p class="text-small">This is one of the project in Freecodecamp's curriculum, "Build a Nightlife Coordination App"</p>
+        <p class="text-small">Login to add some bars that you plan on going. Or search for nearby bars, review it, and see for yourself!</p>
     </div>
 </div>
 
 <div class="container">
-	<div class="all-polls">
-		<h4 class="text-center">
-			<span ng-if="loader.isLoadingPolls">Loading data <i class="fa fa-spinner fa-spin"></i></span>
-			<span ng-if="!loader.isLoadingPolls" ng-cloak>POLLS FOUND: {{polls.length}}</span>
-		</h4>
-		
-		<table class="table table-hover hidden">
-			
-			<!-- START POLLS TEMPLATE -->
-			<tr ng-repeat="data in polls">
-				<td><a ng-href="/polls/{{data._id}}" ng-cloak>{{data.description}}</a></td>
-			</tr>
-			<!-- END POLLS TEMPLATE -->
-			
-		</table>
-	</div>
+	
 </div>
 
 <footer class="footer">
 	<div class="container">
 		<span>This app is built by <a href="https://www.freecodecamp.com/jcsgithub" target="_blank">jcsgithub</a> of Freecodecamp.</span><br/>
-		<span>Github repository: <a href="https://github.com/jcsgithub/jcsgithub-votingapp" target="_blank">jcsgithub/jcsgithub-votingapp</a></span>
+		<span>Github repository: <a href="https://github.com/jcsgithub/jcsgithub-nightlifeapp" target="_blank">jcsgithub/jcsgithub-nightlifeapp</a></span>
 	</div>
 </footer>
 
