@@ -43,7 +43,7 @@
             <!-- Navbar authorized -->
             <ul id="authorized-navbar" class="nav navbar-nav navbar-right hide">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="/plans">My Plans</a></li>
+                <li><a href="/mybars">My Bars</a></li>
                 <li><a href="/logout">Sign out</a></li>
             </ul>
         </div>
@@ -52,9 +52,51 @@
 
 <div class="container">
     <div class="jumbotron text-center">
-        <h3>FCC Nightlife Coordination App Project</h2>
+        <p><h3>FCC Nightlife Coordination App Project</h3></p>
         <p class="text-small">This is one of the project in Freecodecamp's curriculum, "Build a Nightlife Coordination App"</p>
         <p class="text-small">Login to add some bars that you plan on going. Or search for nearby bars, review it, and see for yourself!</p>
+    </div>
+    
+    <div class="searchbar row">
+    	<div class="col-md-3 col-xs-1"></div>
+    	<div class="col-md-6 col-xs-10">
+    		<form>
+    			<div class="input-group">
+	    			<span class="input-group-addon" id="basic-addon1"><i class="fa fa-car" aria-hidden="true"></i></span>
+					<input required type="text" class="form-control" placeholder="Where would you like to go?">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Go!</button>
+					</span>
+				</div>
+    		</form>
+    	</div>
+    	<div class="col-md-3 col-xs-1"></div>
+    </div>
+    
+    <h4 class="bars-found text-center">3 BARS FOUND</h4>
+    
+    <div class="bars row">
+    	<div class="col-md-1"></div>
+    	
+    	<div class="col-md-10 col-xs-12">
+    		
+    		<!-- START BARS TEMPLATE -->
+    		<div class="bar row">
+    			<div class="col-sm-4 col-xs-12">
+    				<img class="bar-img img-responsive " src="/public/img/placeholder.png" alt="Bar Image"></img>
+    			</div>
+    			<div class="col-sm-8 col-xs-12">
+    				<h4 class="bar-name">Bar Name</h4>
+	    			<p class="bar-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	    			<h5 class="bar-count">10 people are going</h5>
+	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
+    			</div>
+    		</div>
+    		<!-- END BARS TEMPLATE -->
+    		
+    	</div>
+    	
+    	<div class="col-md-1"></div>
     </div>
 </div>
 
