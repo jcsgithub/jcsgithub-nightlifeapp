@@ -3,7 +3,7 @@
 (function () {
    angular
       .module('NightlifeApp', ['ngResource'])
-      .controller('indexController', ['$scope', '$resource', function ($scope, $resource) {
+      .controller('mybarsController', ['$scope', '$resource', function ($scope, $resource) {
          
          /***** INITIALIZE *****/
          $scope.loader = { isLoadingPolls: true };

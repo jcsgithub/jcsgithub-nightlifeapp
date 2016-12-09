@@ -44,6 +44,11 @@ module.exports = function (app, passport) {
 			req.logout();
 			res.redirect('/');
 		});
+		
+	app.route('/mybars')
+		.get(isLoggedIn, function (req, res) {
+			res.sendFile(path + '/public/mybars.html');
+		});
 
 		
 		
