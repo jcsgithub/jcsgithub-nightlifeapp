@@ -6,11 +6,14 @@
       .controller('indexController', ['$scope', '$resource', function ($scope, $resource) {
          
          /***** INITIALIZE *****/
+         $scope.hasSearched = false;
          $scope.loader = { isLoadingUser: true, isSearchingBars: false };
          
          $scope.bars = [];
          $scope.searchTxt = '';
+         $scope.totalBars = 0;
          
+         var Bar = $resource('/api/bars');
          var User = $resource('/api/user');
          
          getUser();
@@ -19,12 +22,28 @@
          
          /***** CONTROLLER FUNCTIONS *****/
          function getBars (searchTxt) {
-            console.log('user is logged in, getting bars')
+            $scope.hasSearched = true;
+            $scope.loader.isSearchingBars = true;
+            
+            $scope.bars = [];
+            
+            Bar.get({ searchTxt: searchTxt }, function (res) {
+               console.log('Bar.get', res)
+               
+               $scope.loader.isSearchingBars = false;
+               $('.bars').removeClass('hidden');
+               
+               $scope.bars = res.businesses;
+               $scope.totalBars = res.total;
+            }, function (err) {
+               console.log('Bar.get error', err);
+            });
          }
          
          function getUser () {
             User.get(function (res) {
-               console.log('getUser', res)
+               console.log('User.get', res)
+               
                if (res._id) {
                   $("#authorized-navbar").removeClass("hide");
                   $("#unauthorized-navbar").addClass("hide");
@@ -41,6 +60,8 @@
          
          
          /***** USER INTERACTIONS *****/
-         
+         $scope.search = function (searchTxt) {
+            getBars(searchTxt);
+         };
       }]);
 })();

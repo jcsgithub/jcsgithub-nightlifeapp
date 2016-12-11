@@ -4,10 +4,12 @@ var path = process.cwd();
 
 module.exports = function (app, passport) {
 	// Paths to import
+	var BarHandler = require(path + '/app/controllers/barHandler.server.js');
 	var UserHandler = require(path + '/app/controllers/userHandler.server.js');
 	
 	// Objects imported
-	var userhandler = new UserHandler();
+	var barHandler = new BarHandler();
+	var userHandler = new UserHandler();
 	
 	
 	
@@ -64,6 +66,9 @@ module.exports = function (app, passport) {
         	};
             res.json(userData);
         });
+        
+    app.route('/api/bars')
+        .get(barHandler.yelpGetAccessToken, barHandler.searchBarByName);
     
     
     

@@ -60,10 +60,10 @@
     <div class="searchbar row">
     	<div class="col-md-3 col-xs-1"></div>
     	<div class="col-md-6 col-xs-10">
-    		<form>
+    		<form ng-submit="search(searchTxt)">
     			<div class="input-group">
 	    			<span class="input-group-addon" id="basic-addon1"><i class="fa fa-car" aria-hidden="true"></i></span>
-					<input required type="text" class="form-control" placeholder="Where would you like to go?">
+					<input ng-model="searchTxt" ng-disabled="loader.isSearchingBars" required type="text" class="form-control" placeholder="Where is the bar located?">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit">Go!</button>
 					</span>
@@ -73,21 +73,23 @@
     	<div class="col-md-3 col-xs-1"></div>
     </div>
     
-    <h4 class="bars-found text-center">3 BARS FOUND</h4>
+    <h4 class="bars-found text-center" ng-if="loader.isSearchingBars" ng-cloak>Searching for bars <i class="fa fa-spinner fa-spin"></i></h4>
+    <h4 class="bars-found text-center" ng-if="!loader.isSearchingBars && hasSearched && !bars.length" ng-cloak>NO BARS FOUND</h4>
+    <h4 class="bars-found text-center" ng-if="!loader.isSearchingBars && hasSearched && bars.length" ng-cloak>{{totalBars}} BAR<span ng-if="totalBars > 1">S</span> FOUND</h4>
     
-    <div class="bars row">
+    <div class="bars row hidden">
     	<div class="col-md-1"></div>
     	
     	<div class="col-md-10 col-xs-12">
     		
     		<!-- START BARS TEMPLATE -->
-    		<div class="bar row">
+    		<div class="bar row" ng-repeat="data in bars track by $index">
     			<div class="col-sm-4 col-xs-12">
-    				<img class="bar-img img-responsive " src="/public/img/placeholder.png" alt="Bar Image"></img>
+    				<img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img>
     			</div>
     			<div class="col-sm-8 col-xs-12">
-    				<h4 class="bar-name">Bar Name</h4>
-	    			<p class="bar-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+    				<h4 class="bar-name">{{data.name}}</h4>
+	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
 	    			<h5 class="bar-count">10 people are going</h5>
 	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
     			</div>

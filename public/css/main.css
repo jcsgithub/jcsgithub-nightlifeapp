@@ -39,6 +39,17 @@ body {
     margin-bottom: 50px;
 }
 
+.bar img {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid #aaa;
+    height: 250px;
+    margin: 0 auto;
+    position: relative;
+    width: 250px;
+}
+
 .bar-name {
     margin-top: 0;
 }
