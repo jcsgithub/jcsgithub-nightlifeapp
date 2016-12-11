@@ -6,10 +6,9 @@
       .controller('mybarsController', ['$scope', '$resource', function ($scope, $resource) {
          
          /***** INITIALIZE *****/
-         $scope.loader = { isLoadingPolls: true };
+         $scope.loader = { isLoadingData: true };
          
-         $scope.bars = [];
-         $scope.searchTxt = '';
+         $scope.user = {};
          
          var User = $resource('/api/user');
          
@@ -18,23 +17,13 @@
          
          
          /***** CONTROLLER FUNCTIONS *****/
-         function getBars (searchTxt) {
-            console.log('user is logged in, getting bars')
-         }
-         
          function getUser () {
             User.get(function (res) {
-               console.log('getUser', res)
-               if (res._id) {
-                  $("#authorized-navbar").removeClass("hide");
-                  $("#unauthorized-navbar").addClass("hide");
-                  
-                  // if user is logged in, continue with the last search
-                  getBars($scope.searchTxt);
-               }
+               $scope.loader.isLoadingData = false;
+               $scope.user = res;
             }, function (err) {
-               $("#authorized-navbar").addClass("hide");
-               $("#unauthorized-navbar").removeClass("hide");
+               console.log('User.get error', err)
+               alert('Oops! Something went wrong. Refresh the page or try again later.');
             });
          }
 

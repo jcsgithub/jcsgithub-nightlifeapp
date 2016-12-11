@@ -30,20 +30,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Nightlife Coordination App</a>
+            <a class="navbar-brand" href="/">Nightlife Coordination App</a>
         </div>
 		
         <div id="navbar" class="navbar-collapse collapse">
-            <!-- Navbar unauthorized -->
-            <ul id="unauthorized-navbar" class="nav navbar-nav navbar-right hide">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a ng-href="/auth/facebook">Sign in with Facebook</a></li>
-            </ul>
-            
-            <!-- Navbar authorized -->
-            <ul id="authorized-navbar" class="nav navbar-nav navbar-right hide">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="/mybars">My Bars</a></li>
+            <ul id="authorized-navbar" class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="#">My Bars</a></li>
                 <li><a href="/logout">Sign out</a></li>
             </ul>
         </div>
@@ -51,28 +44,6 @@
 </nav>
 
 <div class="container">
-    <div class="jumbotron text-center">
-        <p><h3>FCC Nightlife Coordination App Project</h3></p>
-        <p class="text-small">This is one of the project in Freecodecamp's curriculum, "Build a Nightlife Coordination App"</p>
-        <p class="text-small">Login to add some bars that you plan on going. Or search for nearby bars, review it, and see for yourself!</p>
-    </div>
-    
-    <div class="searchbar row">
-    	<div class="col-md-3 col-xs-1"></div>
-    	<div class="col-md-6 col-xs-10">
-    		<form>
-    			<div class="input-group">
-	    			<span class="input-group-addon" id="basic-addon1"><i class="fa fa-car" aria-hidden="true"></i></span>
-					<input required type="text" class="form-control" placeholder="Where would you like to go?">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit">Go!</button>
-					</span>
-				</div>
-    		</form>
-    	</div>
-    	<div class="col-md-3 col-xs-1"></div>
-    </div>
-    
     <h4 class="bars-found text-center">3 BARS FOUND</h4>
     
     <div class="bars row">
@@ -89,7 +60,8 @@
     				<h4 class="bar-name">Bar Name</h4>
 	    			<p class="bar-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
 	    			<h5 class="bar-count">10 people are going</h5>
-	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
+	    			<h6 class="bar-date-added">Date added: 12/12/2016</h6>
+	    			<button class="add-bar btn btn-danger">DELETE FROM BARS LIST</button>
     			</div>
     		</div>
     		<!-- END BARS TEMPLATE -->
@@ -104,13 +76,6 @@
 	
 </div>
 
-<footer class="footer">
-	<div class="container">
-		<span>This app is built by <a href="https://www.freecodecamp.com/jcsgithub" target="_blank">jcsgithub</a> of Freecodecamp.</span><br/>
-		<span>Github repository: <a href="https://github.com/jcsgithub/jcsgithub-nightlifeapp" target="_blank">jcsgithub/jcsgithub-nightlifeapp</a></span>
-	</div>
-</footer>
-
 <!-- Bootstrap & JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -120,6 +85,6 @@
 <script type="text/javascript" src="https://code.angularjs.org/1.6.0-rc.2/angular-resource.min.js"></script>
 
 <!-- Controllers -->
-<script type="text/javascript" src="controllers/indexController.client.js"></script>
+<script type="text/javascript" src="controllers/mybarsController.client.js"></script>
 </body>
 </html>

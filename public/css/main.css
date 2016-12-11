@@ -79,3 +79,12 @@ footer {
 [ng-cloak] {
     display: none !important;
 }
+
+
+
+/****** Media Queries ******/
+@media (max-width: 767px) {
+    .bar-name {
+        margin-top: 15px;
+    }
+}

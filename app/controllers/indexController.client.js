@@ -6,7 +6,7 @@
       .controller('indexController', ['$scope', '$resource', function ($scope, $resource) {
          
          /***** INITIALIZE *****/
-         $scope.loader = { isLoadingPolls: true };
+         $scope.loader = { isLoadingUser: true, isSearchingBars: false };
          
          $scope.bars = [];
          $scope.searchTxt = '';
