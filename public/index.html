@@ -85,10 +85,10 @@
     		<!-- START BARS TEMPLATE -->
     		<div class="bar row" ng-repeat="data in bars track by $index">
     			<div class="col-sm-4 col-xs-12">
-    				<img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img>
+    				<a ng-href="{{data.url}}" target="_blank"><img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img></a>
     			</div>
     			<div class="col-sm-8 col-xs-12">
-    				<h4 class="bar-name">{{data.name}}</h4>
+    				<a ng-href="{{data.url}}" target="_blank"><h4 class="bar-name">{{data.name}}</h4></a>
 	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
 	    			<h5 class="bar-count">10 people are going</h5>
 	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
@@ -109,7 +109,8 @@
 <footer class="footer">
 	<div class="container">
 		<span>This app is built by <a href="https://www.freecodecamp.com/jcsgithub" target="_blank">jcsgithub</a> of Freecodecamp.</span><br/>
-		<span>Github repository: <a href="https://github.com/jcsgithub/jcsgithub-nightlifeapp" target="_blank">jcsgithub/jcsgithub-nightlifeapp</a></span>
+		<span>Github repository: <a href="https://github.com/jcsgithub/jcsgithub-nightlifeapp" target="_blank">jcsgithub/jcsgithub-nightlifeapp</a></span><br/>
+		<span>Used <a href="https://www.yelp.com/developers/">Yelp Fusion API</a> for the application's data.</span>
 	</div>
 </footer>
 

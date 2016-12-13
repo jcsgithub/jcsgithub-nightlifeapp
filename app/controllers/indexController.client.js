@@ -36,7 +36,8 @@
                $scope.bars = res.businesses;
                $scope.totalBars = res.total;
             }, function (err) {
-               console.log('Bar.get error', err);
+               console.log('Bar.get error');
+               console.log(err)
             });
          }
          

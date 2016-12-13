@@ -68,7 +68,7 @@ module.exports = function (app, passport) {
         });
         
     app.route('/api/bars')
-        .get(barHandler.yelpGetAccessToken, barHandler.searchBarByName);
+        .get(barHandler.searchBarByName);
     
     
     
