@@ -89,7 +89,7 @@
     			</div>
     			<div class="col-sm-8 col-xs-12">
     				<a ng-href="{{data.url}}" target="_blank"><h4 class="bar-name">{{data.name}}</h4></a>
-	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
+	    			<p class="bar-description">{{data.review || data.snippet_text || 'No review available.'}}</p>
 	    			<h5 class="bar-count">10 people are going</h5>
 	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
     			</div>
