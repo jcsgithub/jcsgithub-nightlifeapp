@@ -5,6 +5,8 @@ var rp = require('request-promise');
 // var Yelp = require('yelp-api-v3');
 var Yelp = require('yelp');
 
+var Bars = require('../models/bars.js');
+
 // var yelp = new Yelp({
 //     app_id: process.env.YELP_ID,
 //     app_secret: process.env.YELP_SECRET
@@ -17,12 +19,51 @@ var yelp = new Yelp({
   token_secret: process.env.YELP_TOKEN_SECRET,
 });
 
+
 function BarHandler () {
-    this.searchBarById = function (req, res) {
+    this.addOrUpdateBar = function (req, res) {
+        var data = req.body;
         
+        Bars
+            .findOne({ 'barId': data.barId }, function (err, result) {
+                if (err) { throw err; }
+                
+                if (result) {
+                    // update the bar attendees
+                    result.attendees.push(data.userId);
+                    result.save();
+                    res.sendStatus(200);
+                } else {
+                    // create new bar document
+                    var newBar = new Bars();
+
+					newBar.attendees = [data.userId];
+					newBar.barId = data.barId;
+
+					newBar.save(function (err) {
+						if (err) { throw err; }
+						
+						res.sendStatus(200);
+					});
+                }
+            });
     };
     
-    this.searchBarByName = function (req, res) {
+    this.getBarById = function (req, res) {
+        var data = req.params;
+        
+        Bars
+            .findOne({ 'barId': data.id }, function (err, result) {
+                if (err) { throw err; }
+                
+                if (result)
+                    res.status(200).send(result);
+                else
+                    res.status(404).send('BAR DOCUMENT NOT FOUND')
+            });
+    };
+    
+    this.getBars = function (req, res) {
         var data = req.query;
         
         // ****************************************************************
@@ -74,16 +115,18 @@ function BarHandler () {
         // YELP API V2 START
         // ****************************************************************
         
-        yelp.search({ location: data.searchTxt, category_filter: 'bars' }).then(function (data) {
+        yelp.search({ location: data.location, category_filter: 'bars' }).then(function (data) {
             var finalData = data.businesses.map(function (item) {
                 return {
+                    id: item.id,
                     name: item.name,
                     url: item.url,
                     image_url: item.image_url,
                     review: item.snippet_text,
-                    attending: []
+                    attendees: []
                 };
             });
+            
             res.status(200).json({ bars: finalData });
         })
         .catch(function (err) {

@@ -57,6 +57,12 @@ module.exports = function (app, passport) {
 		
 
 	/***** APIs *****/
+    app.route('/api/bars')
+        .get(barHandler.getBars);
+        
+    app.route('/api/bars/:id')
+        .get(barHandler.getBarById);
+        
     app.route('/api/user')
         .get(isAuthorized, function (req, res) {
         	var userData = {
@@ -67,12 +73,13 @@ module.exports = function (app, passport) {
             res.json(userData);
         });
         
-    app.route('/api/bars')
-        .get(barHandler.searchBarByName);
+    
+    app.route('/api/user/bars')
+        .post(isAuthorized, userHandler.updateBars, barHandler.addOrUpdateBar);
+        
     
     
     
-
 
 	/***** Facebook authorization *****/
 	app.route('/auth/facebook')

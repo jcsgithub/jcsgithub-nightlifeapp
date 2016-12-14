@@ -37,7 +37,7 @@
             <!-- Navbar unauthorized -->
             <ul id="unauthorized-navbar" class="nav navbar-nav navbar-right hide">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a ng-href="/auth/facebook">Sign in with Facebook</a></li>
+                <li><a ng-href="/auth/facebook" class="facebook-login">Sign in with Facebook</a></li>
             </ul>
             
             <!-- Navbar authorized -->
@@ -73,6 +73,7 @@
     	<div class="col-md-3 col-xs-1"></div>
     </div>
     
+    <h4 class="bars-found text-center" ng-if="loader.isAddingBar" ng-cloak>Adding bar <i class="fa fa-spinner fa-spin"></i></h4>
     <h4 class="bars-found text-center" ng-if="loader.isSearchingBars" ng-cloak>Searching for bars <i class="fa fa-spinner fa-spin"></i></h4>
     <h4 class="bars-found text-center" ng-if="!loader.isSearchingBars && hasSearched && !bars.length" ng-cloak>NO BARS FOUND</h4>
     
@@ -82,17 +83,18 @@
     	<div class="col-md-10 col-xs-12">
     		
     		<!-- START BARS TEMPLATE -->
-    		<div class="bar row" ng-repeat="data in bars track by $index">
+    		<div ng-if="!loader.isAddingBar" class="bar row" ng-repeat="data in bars track by $index">
     			<div class="col-sm-4 col-xs-12">
     				<a ng-href="{{data.url}}" target="_blank"><img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img></a>
     			</div>
     			<div class="col-sm-8 col-xs-12">
     				<a ng-href="{{data.url}}" target="_blank"><h4 class="bar-name">{{data.name}}</h4></a>
 	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
-	    			<h5 ng-if="data.attending.length == 0" class="bar-count">No one is going yet</h5>
-	    			<h5 ng-if="data.attending.length == 1" class="bar-count">1 person is going</h5>
-	    			<h5 ng-if="data.attending.length > 1" class="bar-count">{{data.attending.length}} people are going</h5>
-	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
+	    			<h5 ng-if="!data.attendees || data.attendees.length == 0" class="bar-count text-danger">No one is going yet</h5>
+	    			<h5 ng-if="data.attendees.length == 1" class="bar-count text-success">1 person is going</h5>
+	    			<h5 ng-if="data.attendees.length > 1" class="bar-count text-success">{{data.attendees.length}} people are going</h5>
+	    			<button ng-hide="userObject.bars.indexOf(data.id) > -1" ng-click="addBar(data.id, $index)" class="add-bar btn btn-default">ADD TO BARS LIST</button>
+	    			<button ng-if="isLoggedIn && userObject.bars.indexOf(data.id) > -1" ng-click="deleteBar(data.id, $index)" class="delete-bar btn btn-danger">DELETE FROM BARS LIST</button>
     			</div>
     		</div>
     		<!-- END BARS TEMPLATE -->

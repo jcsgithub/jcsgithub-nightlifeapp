@@ -62,7 +62,7 @@ body {
     
 }
 
-.add-bar {
+.add-bar, .delete-bar {
     margin-top: 15px;
 }
 
