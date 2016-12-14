@@ -74,6 +74,7 @@
     </div>
     
     <h4 class="bars-found text-center" ng-if="loader.isAddingBar" ng-cloak>Adding bar <i class="fa fa-spinner fa-spin"></i></h4>
+	<h4 class="bars-found text-center" ng-if="loader.isDeletingBar" ng-cloak>Deleting bar <i class="fa fa-spinner fa-spin"></i></h4>
     <h4 class="bars-found text-center" ng-if="loader.isSearchingBars" ng-cloak>Searching for bars <i class="fa fa-spinner fa-spin"></i></h4>
     <h4 class="bars-found text-center" ng-if="!loader.isSearchingBars && hasSearched && !bars.length" ng-cloak>NO BARS FOUND</h4>
     
@@ -83,7 +84,7 @@
     	<div class="col-md-10 col-xs-12">
     		
     		<!-- START BARS TEMPLATE -->
-    		<div ng-if="!loader.isAddingBar" class="bar row" ng-repeat="data in bars track by $index">
+    		<div ng-hide="loader.isAddingBar || loader.isDeletingBar" class="bar row" ng-repeat="data in bars track by $index">
     			<div class="col-sm-4 col-xs-12">
     				<a ng-href="{{data.url}}" target="_blank"><img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img></a>
     			</div>

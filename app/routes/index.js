@@ -75,7 +75,8 @@ module.exports = function (app, passport) {
         
     
     app.route('/api/user/bars')
-        .post(isAuthorized, userHandler.updateBars, barHandler.addOrUpdateBar);
+        .post(isAuthorized, userHandler.updateBars, barHandler.addOrUpdateBarAttendees)
+        .put(isAuthorized, userHandler.updateBars, barHandler.deleteBarAttendee);
         
     
     

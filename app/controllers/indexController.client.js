@@ -7,7 +7,7 @@
          
          /***** INITIALIZE *****/
          $scope.hasSearched = false;
-         $scope.loader = { isAddingBar: false, isLoadingUser: true, isSearchingBars: false };
+         $scope.loader = { isAddingBar: false, isDeletingBar: false, isLoadingUser: true, isSearchingBars: false };
          
          $scope.bars = [];
          $scope.isLoggedIn = false;
@@ -17,7 +17,11 @@
          var Bar = $resource('/api/bars');
          var BarById = $resource('/api/bars/:id');
          var User = $resource('/api/user');
-         var UserBars = $resource('/api/user/bars');
+         var UserBars = $resource(
+            '/api/user/bars',
+            {},
+            { update: { method: 'PUT' } }
+         );
          
          
          getUser();
@@ -85,6 +89,8 @@
          $scope.addBar = function (barId, index) {
             if ($scope.isLoggedIn) {
                $scope.loader.isAddingBar = true;
+               
+               $scope.bars[index].attendees.push($scope.userObject._id);
                $scope.userObject.bars.push(barId);
                
                var data = { 
@@ -95,8 +101,6 @@
                
                UserBars.save(data, function (res) {
                   $scope.loader.isAddingBar = false;
-                  
-                  $scope.bars[index].attendees.push($scope.userObject._id);
                }, function (err) {
                   console.log('UserBars.save error', err)
                });
@@ -106,7 +110,25 @@
          };
          
          $scope.deleteBar = function (barId, index) {
-            console.log('deleting', barId, index)
+            $scope.loader.isDeletingBar = true;
+            
+            var barIdIndex = $scope.userObject.bars.indexOf(barId);
+            $scope.userObject.bars.splice(barIdIndex, 1);
+            
+            var userIdIndex = $scope.bars[index].attendees.indexOf($scope.userObject._id);
+            $scope.bars[index].attendees.splice(userIdIndex, 1);
+            
+            var data = { 
+               barId: barId,
+               newUserBars: $scope.userObject.bars,
+               userId: $scope.userObject._id
+            };
+            
+            UserBars.update(data, function (res) {
+               $scope.loader.isDeletingBar = false;
+            }, function (err) {
+               console.log('UserBars.update error', err)
+            });
          };
          
          $scope.search = function (searchTxt) {

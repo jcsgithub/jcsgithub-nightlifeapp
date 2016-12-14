@@ -21,7 +21,7 @@ var yelp = new Yelp({
 
 
 function BarHandler () {
-    this.addOrUpdateBar = function (req, res) {
+    this.addOrUpdateBarAttendees = function (req, res) {
         var data = req.body;
         
         Bars
@@ -45,6 +45,25 @@ function BarHandler () {
 						
 						res.sendStatus(200);
 					});
+                }
+            });
+    };
+    
+    this.deleteBarAttendee = function (req, res) {
+        var data = req.body;
+        
+        Bars
+            .findOne({ 'barId': data.barId }, function (err, result) {
+                if (err) { throw err; }
+                
+                if (result) {
+                    // delete the userId in the bar's attendees
+                    var userIdIndex = result.attendees.indexOf(userIdIndex);
+                    result.attendees.splice(userIdIndex, 1);
+                    result.save();
+                    res.sendStatus(200);
+                } else {
+                    res.status(404).send('BAR DOCUMENT NOT FOUND');
                 }
             });
     };
