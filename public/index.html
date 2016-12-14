@@ -88,10 +88,10 @@
     		
     		<!-- START BARS TEMPLATE -->
     		<div ng-hide="loader.isAddingBar || loader.isDeletingBar" class="bar row" ng-repeat="data in bars track by $index">
-    			<div class="col-sm-4 col-xs-12">
+    			<div class="col-sm-3 col-xs-4">
     				<a ng-href="{{data.url}}" target="_blank"><img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img></a>
     			</div>
-    			<div class="col-sm-8 col-xs-12">
+    			<div class="col-sm-9 col-xs-8">
     				<a ng-href="{{data.url}}" target="_blank"><h4 class="bar-name">{{data.name}}</h4></a>
 	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
 	    			<h5 ng-if="!data.attendees || data.attendees.length == 0" class="bar-count text-danger">No one is going yet</h5>

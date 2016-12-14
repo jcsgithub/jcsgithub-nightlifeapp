@@ -44,10 +44,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px solid #aaa;
-    height: 250px;
+    height: 150;
     margin: 0 auto;
     position: relative;
-    width: 250px;
+    width: 150;
 }
 
 .bar-name {
@@ -94,8 +94,8 @@ footer {
 
 
 /****** Media Queries ******/
-@media (max-width: 767px) {
-    .bar-name {
-        margin-top: 15px;
-    }
-}
+/*@media (max-width: 767px) {*/
+/*    .bar-name {*/
+/*        margin-top: 15px;*/
+/*    }*/
+/*}*/
