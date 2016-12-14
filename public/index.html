@@ -65,7 +65,7 @@
 	    			<span class="input-group-addon" id="basic-addon1"><i class="fa fa-car" aria-hidden="true"></i></span>
 					<input ng-model="searchTxt" ng-disabled="loader.isSearchingBars" required type="text" class="form-control" placeholder="Where is the bar located?">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit">Go!</button>
+						<button ng-disabled="loader.isSearchingBars" class="btn btn-default" type="submit">Go!</button>
 					</span>
 				</div>
     		</form>

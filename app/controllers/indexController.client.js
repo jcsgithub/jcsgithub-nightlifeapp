@@ -27,12 +27,13 @@
             $scope.bars = [];
             
             Bar.get({ searchTxt: searchTxt }, function (res) {
-               console.log('Bar.get', res)
-               
                $scope.loader.isSearchingBars = false;
                $('.bars').removeClass('hidden');
                
                $scope.bars = res.bars;
+               
+               // to not search again after logging in
+               localStorage.setItem('jcsgithubNightlifeAppLastSearch', searchTxt);
             }, function (err) {
                console.log('Bar.get error');
                console.log(err)
@@ -47,8 +48,10 @@
                   $("#authorized-navbar").removeClass("hide");
                   $("#unauthorized-navbar").addClass("hide");
                   
-                  // if user is logged in, continue with the last search
-                  getBars($scope.searchTxt);
+                  // check if localStorage has last search
+                  var lastSearchTxt = localStorage.getItem('jcsgithubNightlifeAppLastSearch');
+                  if (lastSearchTxt)
+                     getBars(lastSearchTxt);
                }
             }, function (err) {
                $("#authorized-navbar").addClass("hide");
