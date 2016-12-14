@@ -62,7 +62,7 @@ body {
     
 }
 
-.add-bar, .delete-bar {
+.add-bar, .delete-bar, .alert-add-bar, .alert-delete-bar {
     margin-top: 15px;
 }
 

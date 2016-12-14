@@ -23,6 +23,8 @@
             { update: { method: 'PUT' } }
          );
          
+         $(".alert-add-bar").hide();
+         $(".alert-delete-bar").hide();
          
          getUser();
          
@@ -101,6 +103,11 @@
                
                UserBars.save(data, function (res) {
                   $scope.loader.isAddingBar = false;
+                  
+                  $(".alert-add-bar").alert();
+                  $(".alert-add-bar").fadeTo(2000, 500).slideUp(500, function(){
+                     $(".alert-add-bar").slideUp(500);
+                  });   
                }, function (err) {
                   console.log('UserBars.save error', err)
                });
@@ -126,6 +133,11 @@
             
             UserBars.update(data, function (res) {
                $scope.loader.isDeletingBar = false;
+               
+               $(".alert-delete-bar").alert();
+               $(".alert-delete-bar").fadeTo(2000, 500).slideUp(500, function(){
+                  $(".alert-delete-bar").slideUp(500);
+               });  
             }, function (err) {
                console.log('UserBars.update error', err)
             });
