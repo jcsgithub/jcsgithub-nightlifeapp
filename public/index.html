@@ -75,7 +75,6 @@
     
     <h4 class="bars-found text-center" ng-if="loader.isSearchingBars" ng-cloak>Searching for bars <i class="fa fa-spinner fa-spin"></i></h4>
     <h4 class="bars-found text-center" ng-if="!loader.isSearchingBars && hasSearched && !bars.length" ng-cloak>NO BARS FOUND</h4>
-    <h4 class="bars-found text-center" ng-if="!loader.isSearchingBars && hasSearched && bars.length" ng-cloak>{{totalBars}} BAR<span ng-if="totalBars > 1">S</span> FOUND</h4>
     
     <div class="bars row hidden">
     	<div class="col-md-1"></div>
@@ -89,8 +88,10 @@
     			</div>
     			<div class="col-sm-8 col-xs-12">
     				<a ng-href="{{data.url}}" target="_blank"><h4 class="bar-name">{{data.name}}</h4></a>
-	    			<p class="bar-description">{{data.review || data.snippet_text || 'No review available.'}}</p>
-	    			<h5 class="bar-count">10 people are going</h5>
+	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
+	    			<h5 ng-if="data.attending.length == 0" class="bar-count">No one is going yet</h5>
+	    			<h5 ng-if="data.attending.length == 1" class="bar-count">1 person is going</h5>
+	    			<h5 ng-if="data.attending.length > 1" class="bar-count">{{data.attending.length}} people are going</h5>
 	    			<button class="add-bar btn btn-default">ADD TO BARS LIST</button>
     			</div>
     		</div>

@@ -74,8 +74,17 @@ function BarHandler () {
         // YELP API V2 START
         // ****************************************************************
         
-        yelp.search({ location: data.searchTxt.toLowerCase(), category_filter: 'bars' }).then(function (data) {
-            res.send(data);
+        yelp.search({ location: data.searchTxt, category_filter: 'bars' }).then(function (data) {
+            var finalData = data.businesses.map(function (item) {
+                return {
+                    name: item.name,
+                    url: item.url,
+                    image_url: item.image_url,
+                    review: item.snippet_text,
+                    attending: []
+                };
+            });
+            res.status(200).json({ bars: finalData });
         })
         .catch(function (err) {
             console.error('yelp.search', err);

@@ -11,7 +11,6 @@
          
          $scope.bars = [];
          $scope.searchTxt = '';
-         $scope.totalBars = 0;
          
          var Bar = $resource('/api/bars');
          var User = $resource('/api/user');
@@ -33,8 +32,7 @@
                $scope.loader.isSearchingBars = false;
                $('.bars').removeClass('hidden');
                
-               $scope.bars = res.businesses;
-               $scope.totalBars = res.total;
+               $scope.bars = res.bars;
             }, function (err) {
                console.log('Bar.get error');
                console.log(err)
