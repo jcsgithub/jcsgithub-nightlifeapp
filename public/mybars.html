@@ -44,7 +44,12 @@
 </nav>
 
 <div class="container">
-    <h4 class="bars-found text-center">3 BARS FOUND</h4>
+    
+	<div class="alert alert-success alert-delete-bar">Delete bar success!</div>
+    
+    <h4 class="bars-found text-center" ng-if="loader.isLoadingData" ng-cloak>Loading data <i class="fa fa-spinner fa-spin"></i></h4>
+    <h4 class="bars-found text-center" ng-if="loader.isDeletingBar" ng-cloak>Deleting bar <i class="fa fa-spinner fa-spin"></i></h4>
+    <h4 class="bars-found text-center" ng-if="!loader.isLoadingData && !bars.length" ng-cloak>NO BARS ADDED</h4>
     
     <div class="bars row">
     	<div class="col-md-1"></div>
@@ -52,16 +57,18 @@
     	<div class="col-md-10 col-xs-12">
     		
     		<!-- START BARS TEMPLATE -->
-    		<div class="bar row">
-    			<div class="col-sm-4 col-xs-12">
-    				<img class="bar-img img-responsive " src="/public/img/placeholder.png" alt="Bar Image"></img>
+    		<div ng-hide="loader.isAddingBar || loader.isDeletingBar" class="bar row" ng-repeat="data in bars track by $index">
+    			<div class="col-sm-3 col-xs-4">
+    				<a ng-href="{{data.url}}" target="_blank"><img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img></a>
     			</div>
-    			<div class="col-sm-8 col-xs-12">
-    				<h4 class="bar-name">Bar Name</h4>
-	    			<p class="bar-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-	    			<h5 class="bar-count">10 people are going</h5>
-	    			<h6 class="bar-date-added">Date added: 12/12/2016</h6>
-	    			<button class="add-bar btn btn-danger">DELETE FROM BARS LIST</button>
+    			<div class="col-sm-9 col-xs-8">
+    				<a ng-href="{{data.url}}" target="_blank"><h4 class="bar-name">{{data.name}}</h4></a>
+	    			<p class="bar-description">{{data.review || 'No review available.'}}</p>
+	    			<h5 ng-if="!data.attendees || data.attendees.length == 0" class="bar-count text-danger">No one is going yet</h5>
+	    			<h5 ng-if="data.attendees.length == 1" class="bar-count text-success">1 person is going</h5>
+	    			<h5 ng-if="data.attendees.length > 1" class="bar-count text-success">{{data.attendees.length}} people are going</h5>
+	    			<button ng-hide="userObject.bars.indexOf(data.id) > -1" ng-click="addBar(data.id, $index)" class="add-bar btn btn-default">ADD TO BARS LIST</button>
+	    			<button ng-if="userObject.bars.indexOf(data.id) > -1" ng-click="deleteBar(data.id, $index)" class="delete-bar btn btn-danger">DELETE FROM BARS LIST</button>
     			</div>
     		</div>
     		<!-- END BARS TEMPLATE -->

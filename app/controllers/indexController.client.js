@@ -3,7 +3,7 @@
 (function () {
    angular
       .module('NightlifeApp', ['ngResource'])
-      .controller('indexController', ['$scope', '$resource', function ($scope, $resource) {
+      .controller('indexController', ['$resource', '$scope', function ($resource, $scope) {
          
          /***** INITIALIZE *****/
          $scope.hasSearched = false;

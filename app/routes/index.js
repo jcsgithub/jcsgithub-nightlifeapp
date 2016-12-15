@@ -73,10 +73,12 @@ module.exports = function (app, passport) {
             res.json(userData);
         });
         
-    
     app.route('/api/user/bars')
         .post(isAuthorized, userHandler.updateBars, barHandler.addOrUpdateBarAttendees)
         .put(isAuthorized, userHandler.updateBars, barHandler.deleteBarAttendee);
+        
+    app.route('/api/yelp/business/:id')
+        .get(barHandler.getYelpBusiness);
         
     
     

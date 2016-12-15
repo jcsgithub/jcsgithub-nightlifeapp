@@ -134,28 +134,50 @@ function BarHandler () {
         // YELP API V2 START
         // ****************************************************************
         
-        yelp.search({ location: data.location, category_filter: 'bars' }).then(function (data) {
-            var finalData = data.businesses.map(function (item) {
-                return {
-                    id: item.id,
-                    name: item.name,
-                    url: item.url,
-                    image_url: item.image_url,
-                    review: item.snippet_text,
-                    attendees: []
-                };
+        yelp.search({ location: data.location, category_filter: 'bars' })
+            .then(function (data) {
+                var finalData = data.businesses.map(function (item) {
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        url: item.url,
+                        image_url: item.image_url,
+                        review: item.snippet_text,
+                        attendees: []
+                    };
+                });
+                
+                res.status(200).json({ bars: finalData });
+            })
+            .catch(function (err) {
+                console.error('yelp.search', err);
             });
-            
-            res.status(200).json({ bars: finalData });
-        })
-        .catch(function (err) {
-            console.error('yelp.search', err);
-        });
         
         // ****************************************************************
         // YELP API V2 END
         // ****************************************************************
         
+    };
+    
+    this.getYelpBusiness = function (req, res) {
+        var data = req.params;
+        
+        yelp.business(data.id)
+            .then(function (data) {
+                var finalData = {
+                    id: data.id,
+                    name: data.name,
+                    url: data.url,
+                    image_url: data.image_url,
+                    review: data.snippet_text,
+                    attendees: []
+                };
+                
+                res.status(200).json(finalData);
+            })
+            .catch(function (err) {
+                console.error('yelp.business', err);
+            });
     };
 }
 
