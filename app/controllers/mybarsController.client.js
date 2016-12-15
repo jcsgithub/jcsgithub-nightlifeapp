@@ -6,6 +6,7 @@
       .controller('mybarsController', ['$q', '$resource', '$scope', function ($q, $resource, $scope) {
          
          /***** INITIALIZE *****/
+         $scope.hasLoadedInitialData = false;
          $scope.loader = { isAddingBar: false, isDeletingBar: false, isLoadingData: true };
          
          $scope.bars = [];
@@ -42,6 +43,9 @@
                   
                   // get data of each bars
                   promises.push(YelpBusiness.get({ id: item }).$promise.then(function (res) {
+                     if (!$scope.hasLoadedInitialData) 
+                        $scope.hasLoadedInitialData = true;
+                     
                      $scope.bars[index].name = res.name;
                      $scope.bars[index].url = res.url;
                      $scope.bars[index].image_url = res.image_url;

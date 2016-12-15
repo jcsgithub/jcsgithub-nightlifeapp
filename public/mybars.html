@@ -57,7 +57,7 @@
     	<div class="col-md-10 col-xs-12">
     		
     		<!-- START BARS TEMPLATE -->
-    		<div ng-hide="loader.isAddingBar || loader.isDeletingBar" class="bar row" ng-repeat="data in bars track by $index">
+    		<div ng-hide="loader.isAddingBar || loader.isDeletingBar || !hasLoadedInitialData" class="bar row" ng-repeat="data in bars track by $index">
     			<div class="col-sm-3 col-xs-4">
     				<a ng-href="{{data.url}}" target="_blank"><img class="bar-img img-responsive " ng-src="{{data.image_url || '/public/img/no-image-found.png'}}" alt="Bar Image"></img></a>
     			</div>
